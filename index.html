@@ -3,85 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Премиум Перманент: Брови, Губы, Веки</title>
+    <title>Перманентный Макияж: Брови, Губы, Веки - Портфолио</title>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
         /* Глобальные стили */
         body {
-            font-family: 'Montserrat', sans-serif; /* Более современный шрифт */
+            font-family: 'Montserrat', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #ffffff; /* Белый фон */
+            background-color: #f7f7f7; /* Светло-серый фон */
             color: #333333;
             text-align: center;
         }
+        .header {
+            background-color: #fce4ec; /* Нежный акцентный цвет */
+            padding: 40px 20px 20px 20px;
+            margin-bottom: 20px;
+        }
         .container {
-            max-width: 700px;
-            margin: 60px auto;
-            padding: 40px;
-            background-color: #ffffff;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px 60px 20px;
         }
         
         /* Заголовки */
         h1 {
-            color: #6a0040; /* Глубокий бордовый акцент */
-            font-size: 2.8em;
-            letter-spacing: 1px;
+            color: #880e4f;
+            font-size: 2.5em;
             margin-bottom: 5px;
             font-weight: 700;
         }
+        p.tagline {
+            font-size: 1.2em;
+            color: #555555;
+            margin-bottom: 30px;
+        }
         h2 {
-            color: #333333;
-            font-size: 1.6em;
+            color: #6a0040;
+            font-size: 1.8em;
             margin-top: 45px;
             margin-bottom: 25px;
             text-transform: uppercase;
-            font-weight: 500;
-        }
-        p {
-            font-size: 1.1em;
-            color: #555555;
-            line-height: 1.6;
+            border-bottom: 2px solid #f06292;
+            padding-bottom: 10px;
         }
 
         /* Список услуг */
         .service-list {
             list-style: none;
             padding: 0;
-            border-top: 1px solid #eeeeee;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
         }
-        .service-list li {
-            padding: 20px 0;
-            border-bottom: 1px solid #eeeeee;
-            text-align: left;
-            font-size: 1.1em;
+        .service-item {
+            width: 30%;
+            min-width: 250px;
+            background-color: #ffffff;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            text-align: center;
         }
-        .service-list strong {
-            color: #6a0040;
-            font-weight: 600;
+        .service-item strong {
+            color: #880e4f;
+            font-size: 1.3em;
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
+        }
+
+        /* Портфолио (Сетка) */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* 3 колонки */
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .portfolio-grid img {
+            width: 100%;
+            height: 250px; /* Фиксированная высота для единообразия */
+            object-fit: cover; /* Обрезка, чтобы заполнить область */
+            border-radius: 8px;
+            transition: transform 0.3s;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .portfolio-grid img:hover {
+            transform: scale(1.05);
         }
 
         /* Кнопка */
         .contact-button {
             display: inline-block;
             margin-top: 50px;
-            padding: 16px 40px;
-            background-color: #6a0040;
+            padding: 18px 45px;
+            background-color: #d81b60;
             color: white;
             text-decoration: none;
-            font-size: 1.2em;
-            border-radius: 4px;
+            font-size: 1.3em;
+            border-radius: 50px;
             transition: background-color 0.3s, box-shadow 0.3s;
             text-transform: uppercase;
             font-weight: 600;
         }
         .contact-button:hover {
-            background-color: #9c27b0;
-            box-shadow: 0 4px 12px rgba(106, 0, 64, 0.3);
+            background-color: #a00037;
+            box-shadow: 0 6px 15px rgba(216, 27, 96, 0.4);
         }
 
         /* Иконки соцсетей */
@@ -89,33 +119,48 @@
             margin: 35px 0 20px 0;
         }
         .social-links a {
-            color: #6a0040; /* Цвет иконок */
-            margin: 0 18px;
-            font-size: 2.2em; /* Размер иконок */
+            color: #d81b60;
+            margin: 0 20px;
+            font-size: 2.5em;
             transition: color 0.3s;
         }
         .social-links a:hover {
-            color: #9c27b0;
+            color: #a00037;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>PREMIUM PERMANENT</h1>
-        <p>Я - мастер перманентного макияжа. Моя работа — подчеркнуть вашу природную красоту, <br> используя только премиум-пигменты и безопасные техники.</p>
+    <div class="header">
+        <h1>✨ Ваш Мастер Перманентного Макияжа ✨</h1>
+        <p class="tagline">Создаю долговременную красоту: Брови, Губы, Веки. Премиум-материалы, индивидуальный подход.</p>
+    </div>
 
+    <div class="container">
+        
         <h2>Мои Услуги</h2>
-        <ul class="service-list">
-            <li>
-                <strong>Брови:</strong> Пудровое напыление. Создание идеальной, естественной формы, которая держится долго.
-            </li>
-            <li>
-                <strong>Губы:</strong> Акварельная техника и помадный эффект. Коррекция контура и придание соблазнительного оттенка.
-            </li>
-            <li>
-                <strong>Веки:</strong> Межресничка и классическая стрелка. Выразительный и глубокий взгляд 24/7.
-            </li>
-        </ul>
+        <div class="service-list">
+            <div class="service-item">
+                <strong>Брови</strong>
+                <p>Пудровое напыление. Создание идеальной, естественной формы, которая держится долго.</p>
+            </div>
+            <div class="service-item">
+                <strong>Губы</strong>
+                <p>Акварельная техника, помадный эффект. Коррекция контура и придание соблазнительного оттенка.</p>
+            </div>
+            <div class="service-item">
+                <strong>Веки</strong>
+                <p>Межресничка, классическая стрелка. Глубокий и выразительный взгляд 24/7.</p>
+            </div>
+        </div>
+
+        
+        <h2>Портфолио Работ</h2>
+        <div class="portfolio-grid">
+            <img src="images/photo1.jpg" alt="Пример работы 1: Брови">
+            <img src="images/photo2.jpg" alt="Пример работы 2: Губы">
+            <img src="images/photo3.jpg" alt="Пример работы 3: Веки">
+            </div>
+
 
         <h2>Запись и Консультация</h2>
         <p>Для записи на процедуру или бесплатной консультации свяжитесь со мной в удобном мессенджере.</p>
@@ -128,10 +173,6 @@
             <a href="https://wa.me/89132579447" target="_blank" title="WhatsApp">
                 <i class="fab fa-whatsapp"></i>
             </a>
-
-            <a href="ВАША_ССЫЛКА_НА_INSTAGRAM" target="_blank" title="Instagram">
-                <i class="fab fa-instagram"></i>
-            </a>
         </div>
         
         <a href="ВАША_ОСНОВНАЯ_ССЫЛКА_ДЛЯ_ЗАПИСИ" class="contact-button">
@@ -141,6 +182,3 @@
     </div>
 </body>
 </html>
-
-
-
