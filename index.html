@@ -12,7 +12,6 @@
            1. CSS Variables (для Тем)
            ==================================== */
         :root {
-            /* Light Theme (Светлая по умолчанию) */
             --bg-color: #ffffff;
             --secondary-bg: #f8f8f8;
             --text-color: #111111;
@@ -20,10 +19,10 @@
             --accent-color: #ff007f; /* Электрический розовый */
             --glow-shadow: 0 0 10px rgba(255, 0, 127, 0.5);
             --card-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            --modal-bg: rgba(0, 0, 0, 0.9); /* Фон для модального окна */
         }
 
         .dark-theme {
-            /* Dark Theme (Темная) */
             --bg-color: #111111;
             --secondary-bg: #222222;
             --text-color: #f0f0f0;
@@ -31,6 +30,7 @@
             --accent-color: #ff40ab; /* Ярче розовый */
             --glow-shadow: 0 0 15px rgba(255, 64, 171, 0.8);
             --card-shadow: 0 8px 25px rgba(255, 255, 255, 0.15);
+            --modal-bg: rgba(0, 0, 0, 0.95);
         }
 
         /* ====================================
@@ -42,7 +42,7 @@
         }
         
         /* ====================================
-           3. Глобальные стили и Дизайн
+           3. Глобальные стили и Дизайн (Не изменены)
            ==================================== */
         body {
             font-family: 'Arial', sans-serif;
@@ -58,8 +58,6 @@
             margin: 0 auto;
             padding: 0 20px 60px 20px;
         }
-        
-        /* Хедер */
         .header {
             background-color: var(--secondary-bg);
             padding: 60px 20px;
@@ -101,8 +99,6 @@
             background-color: var(--accent-color);
             box-shadow: var(--glow-shadow);
         }
-
-        /* Карточки услуг */
         .service-list {
             list-style: none;
             padding: 0;
@@ -139,7 +135,7 @@
             font-size: 1em;
         }
 
-        /* Портфолио (Сетка) */
+        /* Портфолио (Сетка) - Обновлено: курсор pointer */
         .portfolio-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -153,12 +149,12 @@
             border-radius: 8px;
             box-shadow: var(--card-shadow);
             transition: transform 0.3s, opacity 0.3s;
-            cursor: zoom-in;
+            cursor: pointer; /* Главное изменение для UX */
             border: 1px solid var(--accent-color);
             animation: fadeIn 1.2s ease-out;
         }
         .portfolio-grid img:hover {
-            transform: scale(1.05) rotate(-1deg);
+            transform: scale(1.03);
             opacity: 0.9;
         }
 
@@ -200,6 +196,57 @@
             background: var(--accent-dark);
             color: white;
         }
+
+        /* ====================================
+           4. Стили для Модального Окна (Lightbox)
+           ==================================== */
+        #imageModal {
+            display: none; 
+            position: fixed; 
+            z-index: 1000; 
+            padding-top: 60px; 
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto; 
+            background-color: var(--modal-bg);
+            transition: opacity 0.3s ease;
+        }
+
+        #modalImage {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 800px;
+            max-height: 90vh; /* Ограничение высоты */
+            border-radius: 8px;
+            transform: scale(0.9);
+            transition: transform 0.4s ease-out;
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+            text-shadow: 0 0 10px black;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: var(--accent-color);
+            text-decoration: none;
+            cursor: pointer;
+        }
+        /* Анимация появления модального окна */
+        .modal-content.animate-open {
+            transform: scale(1);
+        }
     </style>
 </head>
 <body>
@@ -234,9 +281,9 @@
         
         <h2>Портфолио</h2>
         <div class="portfolio-grid">
-            <img src="images/photo1.jpg" alt="Свежая работа: Брови">
-            <img src="images/photo2.jpg" alt="Свежая работа: Губы">
-            <img src="images/photo3.jpg" alt="Свежая работа: Веки">
+            <img src="images/photo1.jpg" alt="Свежая работа: Брови" onclick="openModal(this)">
+            <img src="images/photo2.jpg" alt="Свежая работа: Губы" onclick="openModal(this)">
+            <img src="images/photo3.jpg" alt="Свежая работа: Веки" onclick="openModal(this)">
             </div>
 
 
@@ -253,11 +300,37 @@
             </a>
         </div>
         
-        </div>
+    </div>
+
+    <div id="imageModal" onclick="closeModal()">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
 
     <script>
         // ====================================
-        // 4. JavaScript для переключения темы
+        // 5. JavaScript для Модального окна
+        // ====================================
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+
+        function openModal(imgElement) {
+            modal.style.display = "block";
+            modalImg.src = imgElement.src;
+            modalImg.classList.add('animate-open');
+            // Чтобы скрыть кнопку смены темы, пока открыто модальное окно
+            document.getElementById('theme-toggle').style.visibility = 'hidden'; 
+        }
+
+        function closeModal() {
+            modal.style.display = "none";
+            modalImg.classList.remove('animate-open');
+            // Вернуть кнопку смены темы
+            document.getElementById('theme-toggle').style.visibility = 'visible'; 
+        }
+
+        // ====================================
+        // 6. JavaScript для переключения темы (Сохранено)
         // ====================================
         const toggleButton = document.getElementById('theme-toggle');
         const body = document.body;
@@ -282,6 +355,13 @@
                 toggleButton.textContent = 'Светлая тема';
             }
         }
+        
+        // Закрытие модального окна по нажатию Esc
+        document.addEventListener('keydown', function(event) {
+            if (event.key === "Escape" && modal.style.display === "block") {
+                closeModal();
+            }
+        });
     </script>
 </body>
 </html>
